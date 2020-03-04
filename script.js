@@ -57,6 +57,7 @@ function getFuncsList() {
 
     prev.push({
       func,
+      funcStr: codeElem.value,
       name: nameElem.value
     });
 
