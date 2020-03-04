@@ -1,0 +1,130 @@
+HTML {
+  font-size: 16px;
+}
+
+BODY {
+  font: 1rem/1.5 Trebuchet MS, Arial, sans-serif;
+}
+
+H1, H2, H3 {
+  margin: 0 0 .5em;
+}
+
+H1 {
+  color: #000;
+  margin-bottom: 1em;
+}
+
+H2 {
+  color: #555;
+}
+
+H3 {
+  margin-bottom: .25em;
+}
+
+INPUT,
+TEXTAREA {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #DDD;
+  font: inherit;
+}
+
+.page {
+  max-width: 1000px;
+  margin: 2rem auto;
+}
+
+.section + .section {
+  margin-top: 2rem
+}
+
+/* Inputs */
+.inputs__list {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.options {
+  align-items: flex-end;
+}
+
+.inputs__item {
+  flex-grow: 1;
+  margin-left: 2rem;
+}
+
+.inputs__item:first-child {
+  margin-left: 0;
+}
+
+.inputs__label {
+  display: block;
+}
+
+.inputs__label + .inputs__label{
+  margin-top: 1rem;
+}
+
+.inputs__label-text {
+  display: block;
+  margin-bottom: .25rem;
+}
+
+.inputs__footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+/* Run control */
+
+.run-benchmark {
+  margin-top: 1rem;
+  min-width: 100px;
+  border: none;
+  background: #000;
+  border-radius: 10px;
+  padding: .5rem 1rem;
+  color: #FFF;
+  font: inherit;
+  cursor: pointer;
+}
+
+.run-benchmark:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+/* Result */
+
+.results {
+  padding-top: 1.5rem;
+  border-top: 3px solid yellowgreen;
+}
+.results__table {
+  width: 100%;
+  border: 1px solid #DDD;
+  border-collapse: collapse;
+}
+
+.results TH,
+.results TD {
+  text-align: left;
+  padding: .5rem 1rem;
+  border-bottom: 1px solid #DDD;
+}
+
+.results TR:last-child TD {
+  border-bottom: none;
+}
+
+.results__status {
+  color: #999;
+  font-style: italic;
+}

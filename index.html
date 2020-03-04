@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Performance Benchmarking</title>
+  <script defer src="./script.js" type="module"></script>
+  <link rel="stylesheet" type="text/css" href="./styles.css">
+</head>
+<body>
+  <div class="page">
+
+    <h1>Performance Benchmarking</h1>
+
+    <section class="section inputs">
+      <h2>Functions</h2>
+
+      <ul class="inputs__list code-containers">
+        <li class="inputs__item code-containers__item">
+          <label class="inputs__label">
+            <span class="inputs__label-text">Name</span>
+
+            <input class="code-containers__name" type="text" value="#1">
+          </label>
+
+          <label class="inputs__label">
+            <span class="inputs__label-text">Code</span>
+
+            <textarea class="inputs__textarea code-containers__textarea" cols="30" rows="10">console.log(123);</textarea>
+          </label>
+        </li>
+        <li class="inputs__item code-containers__item">
+          <label class="inputs__label">
+            <span class="inputs__label-text">Name</span>
+
+            <input class="code-containers__name" type="text" value="#2">
+          </label>
+
+          <label class="inputs__label">
+            <span class="inputs__label-text">Code</span>
+
+            <textarea class="inputs__textarea code-containers__textarea" cols="30" rows="10">console.log(Array(20).fill(Math.random()));</textarea>
+          </label>
+        </li>
+      </ul>
+
+      <footer class="inputs__footer">
+        <ul class="inputs__list options">
+          <li class="inputs__item">
+            <label class="inputs__label">
+              <span class="inputs__label-text">Function repeat</span>
+
+              <input class="options__input" name="funcRepeat" type="text" value="500">
+            </label>
+          </li>
+          <li class="inputs__item">
+            <label class="inputs__label">
+              <span class="inputs__label-text">Bench repeat</span>
+
+              <input class="options__input" name="benchRepeat" type="text" value="20">
+            </label>
+          </li>
+          <li class="inputs__item">
+            <button type="button" class="run-benchmark">Run</button>
+          </li>
+        </ul>
+      </footer>
+    </section>
+
+    <section class="section results">
+      <h2>Results</h2>
+
+      <table class="results__table">
+        <thead class="results__thead">
+          <tr>
+            <th>Function</th>
+            <th>Execution time</th>
+          </tr>
+        </thead>
+
+        <tbody class="results__tbody">
+
+        </tbody>
+      </table>
+    </section>
+  </div>
+</body>
+</html>
