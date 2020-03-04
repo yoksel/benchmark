@@ -76,7 +76,7 @@ function getOptions() {
 
 function getBenchmarksProps() {
   const paramsFromLs = getPropsFromLS();
-  console.log(paramsFromLs);
+
   if(paramsFromLs) {
     return paramsFromLs;
   }
@@ -111,6 +111,12 @@ function getPropsFromLS() {
   }
 
   return;
+}
+
+function updateCodeFromLS() {
+  funcsContainers.forEach(({nameElem, codeElem}, index) => {
+    codeElem.value = paramsFromLs.funcsList[index];
+  });
 }
 
 function setInputsEvents() {
