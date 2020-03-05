@@ -1,7 +1,8 @@
 import Benchmark from './Benchmark.js';
 
 const runBenchmarkControl = document.querySelector('.run-benchmark');
-
+const share = document.querySelector('.share');
+const shareInput = document.querySelector('.share__input');
 const codeInputs = document.querySelectorAll('.code-containers__textarea');
 codeInputs.reduce = [].reduce;
 const optionsInputs = document.querySelectorAll('.options__input');
@@ -75,6 +76,12 @@ function getOptions() {
 }
 
 function getBenchmarksProps() {
+  const paramsFromUrl = getPropsFromURL();
+
+  if(paramsFromUrl) {
+    return paramsFromUrl;
+  }
+
   const paramsFromLs = getPropsFromLS();
 
   if(paramsFromLs) {
@@ -98,8 +105,21 @@ function updateBench({prop, value}) {
   savePropsToLS();
 }
 
+function getPropsFromURL() {
+  const { searchParams } = new URL(location);
+  const data = searchParams.get('data')
+  if(!data) {
+    return;
+  }
+
+  return JSON.parse(data);
+}
+
 function savePropsToLS() {
-  ls.setItem(lsKey, JSON.stringify(benchmarkProps))
+  const propsStr = JSON.stringify(benchmarkProps);
+
+  ls.setItem(lsKey, propsStr);
+  shareInput.value = getUrlStr();
 }
 
 function getPropsFromLS() {
@@ -128,6 +148,15 @@ function fillInputs() {
   optionsInputs.forEach(item => {
     item.value = benchmarkProps[item.name];
   });
+
+  shareInput.value = getUrlStr();
+}
+
+function getUrlStr() {
+  const { origin } = new URL(location);
+  const propsStr = JSON.stringify(benchmarkProps);
+
+  return `${origin}?data=${encodeURIComponent(propsStr)}`
 }
 
 function setInputsEvents() {
@@ -153,5 +182,22 @@ function setInputsEvents() {
         value: item.value
       });
     });
+  });
+
+  share.addEventListener('click', (event) => {
+    if(!event.target.classList.contains('share__text')) {
+      return;
+    }
+    share.classList.toggle('share--opened');
+
+    event.stopPropagation();
+  });
+
+  document.addEventListener('click', (event) => {
+    if(event.target.classList.contains('share__input')) {
+      return;
+    }
+
+    share.classList.remove('share--opened');
   });
 }
