@@ -10,15 +10,14 @@ const funcsContainers = getFuncsContainers();
 const ls = localStorage;
 const lsKey = 'funcsBenchmark';
 
-setInputsEvents();
-
 const benchmarkProps = getBenchmarksProps();
 const benchmark = initBenchmark();
 
+fillCodeInputs();
+setInputsEvents();
 // ------------------------------
 
 function initBenchmark() {
-  console.log('benchmarkProps', benchmarkProps);
   const benchmark = new Benchmark(benchmarkProps);
 
   runBenchmarkControl.addEventListener('click', () => {
@@ -98,24 +97,29 @@ function updateBench({prop, value}) {
 }
 
 function savePropsToLS() {
-  console.log('benchmarkProps', benchmarkProps);
-  console.log('JSON.stringify(benchmarkProps)', JSON.stringify(benchmarkProps));
   ls.setItem(lsKey, JSON.stringify(benchmarkProps))
 }
 
 function getPropsFromLS() {
-  const savedParams = ls.getItem(lsKey);
+  const savedParamsStr = ls.getItem(lsKey);
 
-  if(savedParams) {
-    return JSON.parse(savedParams);
+  if(savedParamsStr) {
+    const savedParams = JSON.parse(savedParamsStr);
+
+    savedParams.funcsList.forEach(item => {
+      item.func = new Function(item.funcStr);
+    })
+    return savedParams;
   }
 
   return;
 }
 
-function updateCodeFromLS() {
+function fillCodeInputs() {
+  const { funcsList } = benchmarkProps;
+
   funcsContainers.forEach(({nameElem, codeElem}, index) => {
-    codeElem.value = paramsFromLs.funcsList[index];
+    codeElem.value = funcsList[index].funcStr;
   });
 }
 
