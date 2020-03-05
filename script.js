@@ -112,7 +112,7 @@ function getPropsFromURL() {
     return;
   }
 
-  return JSON.parse(data);
+  return getFuncFromStr(data);
 }
 
 function savePropsToLS() {
@@ -126,15 +126,20 @@ function getPropsFromLS() {
   const savedParamsStr = ls.getItem(lsKey);
 
   if(savedParamsStr) {
-    const savedParams = JSON.parse(savedParamsStr);
-
-    savedParams.funcsList.forEach(item => {
-      item.func = new Function(item.funcStr);
-    })
-    return savedParams;
+    return getFuncFromStr(savedParamsStr);
   }
 
   return;
+}
+
+function getFuncFromStr(savedParamsStr) {
+  const savedParams = JSON.parse(savedParamsStr);
+
+  savedParams.funcsList.forEach(item => {
+    item.func = new Function(item.funcStr);
+  });
+
+  return savedParams;
 }
 
 function fillInputs() {
