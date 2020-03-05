@@ -116,6 +116,8 @@ TEXTAREA {
 .inputs__label-text {
   display: block;
   margin-bottom: .25rem;
+  font-style: italic;
+  color: #777;
 }
 
 .inputs__footer {
