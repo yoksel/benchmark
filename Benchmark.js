@@ -1,5 +1,11 @@
 export default class Benchmark {
-  constructor({
+  constructor(props) {
+    this.setProps(props);
+    this.resultTBody = document.querySelector('.results__tbody');
+    this.setStatus('Results will be here.<br> During function execition page can be frozen.');
+  }
+
+  setProps({
     funcsList,
     funcRepeat,
     benchRepeat
@@ -7,8 +13,6 @@ export default class Benchmark {
     this.funcsList = funcsList;
     this.funcRepeat = funcRepeat ? funcRepeat : 500;
     this.benchRepeat = benchRepeat ? benchRepeat : 20;
-    this.resultTBody = document.querySelector('.results__tbody');
-    this.setStatus('Results will be here.<br> During function execition page can be frozen.');
   }
 
   prepareResults() {

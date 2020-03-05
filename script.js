@@ -13,8 +13,9 @@ const lsKey = 'funcsBenchmark';
 const benchmarkProps = getBenchmarksProps();
 const benchmark = initBenchmark();
 
-fillCodeInputs();
+fillInputs();
 setInputsEvents();
+
 // ------------------------------
 
 function initBenchmark() {
@@ -92,6 +93,7 @@ function getBenchmarksProps() {
 
 function updateBench({prop, value}) {
   benchmarkProps[prop] = value;
+  benchmark.setProps(benchmarkProps);
 
   savePropsToLS();
 }
@@ -115,11 +117,16 @@ function getPropsFromLS() {
   return;
 }
 
-function fillCodeInputs() {
+function fillInputs() {
   const { funcsList } = benchmarkProps;
 
   funcsContainers.forEach(({nameElem, codeElem}, index) => {
+    nameElem.value = funcsList[index].name;
     codeElem.value = funcsList[index].funcStr;
+  });
+
+  optionsInputs.forEach(item => {
+    item.value = benchmarkProps[item.name];
   });
 }
 
