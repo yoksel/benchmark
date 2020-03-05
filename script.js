@@ -10,6 +10,9 @@ optionsInputs.reduce = [].reduce;
 const funcsContainers = getFuncsContainers();
 const ls = localStorage;
 const lsKey = 'funcsBenchmark';
+const resultTBody = document.querySelector('.results__tbody');
+const messageProcess = 'Results will be here.<br> During function execition page can be frozen.';
+setStatus(messageProcess);
 
 const benchmarkProps = getBenchmarksProps();
 const benchmark = initBenchmark();
@@ -22,8 +25,15 @@ setInputsEvents();
 function initBenchmark() {
   const benchmark = new Benchmark(benchmarkProps);
 
-  runBenchmarkControl.addEventListener('click', () => {
-    benchmark.start(runBenchmarkControl);
+  runBenchmarkControl.addEventListener('click', async () => {
+    runBenchmarkControl.disabled = true;
+    runBenchmarkControl.innerHTML = 'Tests are running...';
+    setStatus(messageProcess);
+    const results = await benchmark.start(runBenchmarkControl);
+
+    runBenchmarkControl.disabled = false;
+    runBenchmarkControl.innerHTML = 'Run';
+    printResults(results);
   });
 
   return benchmark;
@@ -51,7 +61,7 @@ function getFuncsContainers() {
 function getFuncsList() {
   const funcsList = funcsContainers.reduce((prev, {nameElem, codeElem}) => {
     if(!codeElem.value.trim()) {
-      return prev;
+      codeElem.value = `console.log(123);`;
     }
 
     const func = new Function(codeElem.value);
@@ -206,3 +216,26 @@ function setInputsEvents() {
     share.classList.remove('share--opened');
   });
 }
+
+function setStatus(message) {
+  resultTBody.innerHTML =`<tr><td colspan="2" class="results__status">${message}</td></tr>`;
+}
+
+function printResults(results) {
+    const resultsList = Object.values(results);
+    resultsList.sort((a, b) => {
+      return a.time - b.time;
+    });
+    let resultStr = '';
+
+    resultsList.forEach(item => {
+      resultStr += `<tr>
+        <td><h3>${item.name}</h3>
+        ${item.desc}</td>
+        <td>${item.time / 1000}s</td>
+      </tr>`
+    })
+
+    resultTBody.innerHTML = '';
+    resultTBody.insertAdjacentHTML('afterBegin', resultStr);
+  }
