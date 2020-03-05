@@ -1,5 +1,7 @@
 HTML {
   font-size: 16px;
+  --gray: #DDD;
+  --accent: lightseagreen;
 }
 
 BODY {
@@ -11,12 +13,15 @@ H1, H2, H3 {
 }
 
 H1 {
-  color: #000;
   margin-bottom: 1em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid var(--gray);
+  text-align: center;
+  color: #000;
 }
 
 H2 {
-  color: #555;
+  color: var(--accent);
 }
 
 H3 {
@@ -27,7 +32,7 @@ INPUT,
 TEXTAREA {
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid #DDD;
+  border: 1px solid var(--gray);
   font: inherit;
 }
 
@@ -41,6 +46,7 @@ TEXTAREA {
 }
 
 /* Inputs */
+
 .inputs__list {
   display: flex;
   justify-content: space-between;
@@ -105,11 +111,11 @@ TEXTAREA {
 
 .results {
   padding-top: 1.5rem;
-  border-top: 3px solid yellowgreen;
+  border-top: 3px solid var(--accent);
 }
 .results__table {
   width: 100%;
-  border: 1px solid #DDD;
+  border: 1px solid var(--gray);
   border-collapse: collapse;
 }
 
@@ -117,7 +123,11 @@ TEXTAREA {
 .results TD {
   text-align: left;
   padding: .5rem 1rem;
-  border-bottom: 1px solid #DDD;
+  border-bottom: 1px solid var(--gray);
+}
+
+.results TH {
+  color: #777;
 }
 
 .results TR:last-child TD {
