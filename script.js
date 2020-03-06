@@ -30,6 +30,8 @@ function initBenchmark() {
   return benchmark;
 }
 
+// ------------------------------
+
  async function runBenchmark () {
   runBenchmarkControl.disabled = true;
   runBenchmarkControl.innerHTML = 'Tests are running...';
@@ -40,6 +42,8 @@ function initBenchmark() {
   runBenchmarkControl.innerHTML = 'Run';
   printResults(results);
 }
+
+// ------------------------------
 
 function getFuncsContainers() {
   const codeContainersItems = document.querySelectorAll('.code-containers__item');
@@ -60,6 +64,8 @@ function getFuncsContainers() {
   return funcsData;
 }
 
+// ------------------------------
+
 function getFuncsList() {
   const funcsList = funcsContainers.reduce((prev, {nameElem, codeElem}) => {
     if(!codeElem.value.trim()) {
@@ -79,6 +85,8 @@ function getFuncsList() {
 
   return funcsList;
 }
+
+// ------------------------------
 
 function getOptions() {
   return optionsInputs.reduce((prev, item) => {
@@ -109,12 +117,16 @@ function getBenchmarksProps() {
   }
 }
 
+// ------------------------------
+
 function updateBench({prop, value}) {
   benchmarkProps[prop] = value;
   benchmark.setProps(benchmarkProps);
 
   savePropsToLS();
 }
+
+// ------------------------------
 
 function getPropsFromURL() {
   const { searchParams } = new URL(location);
@@ -125,6 +137,8 @@ function getPropsFromURL() {
 
   return getFuncFromStr(data);
 }
+
+// ------------------------------
 
 function savePropsToLS() {
   const propsStr = JSON.stringify(benchmarkProps);
@@ -145,6 +159,8 @@ function getPropsFromLS() {
   return;
 }
 
+// ------------------------------
+
 function getFuncFromStr(savedParamsStr) {
   const savedParams = JSON.parse(savedParamsStr);
 
@@ -158,6 +174,8 @@ function getFuncFromStr(savedParamsStr) {
 
   return savedParams;
 }
+
+// ------------------------------
 
 function fillInputs() {
   const { funcsList } = benchmarkProps;
@@ -178,12 +196,16 @@ function fillInputs() {
   shareInput.value = getUrlStr();
 }
 
+// ------------------------------
+
 function getUrlStr() {
   const { origin } = new URL(location);
   const propsStr = JSON.stringify(benchmarkProps);
 
   return `${origin}?data=${encodeURIComponent(propsStr)}`
 }
+
+// ------------------------------
 
 function setInputsEvents() {
   funcsContainers.forEach(({nameElem, codeElem}) => {
