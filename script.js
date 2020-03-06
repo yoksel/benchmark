@@ -199,10 +199,10 @@ function fillInputs() {
 // ------------------------------
 
 function getUrlStr() {
-  const { origin } = new URL(location);
+  const { origin, pathname } = new URL(location);
   const propsStr = JSON.stringify(benchmarkProps);
 
-  return `${origin}?data=${encodeURIComponent(propsStr)}`
+  return `${origin + pathname}?data=${encodeURIComponent(propsStr)}`
 }
 
 // ------------------------------
