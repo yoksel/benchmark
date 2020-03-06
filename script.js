@@ -99,12 +99,11 @@ function getBenchmarksProps() {
   }
 
   let funcsList = getFuncsList();
-  let {funcRepeat, benchRepeat} = getOptions();
+  let {funcRepeat} = getOptions();
 
   return {
     funcsList,
     funcRepeat,
-    benchRepeat
   }
 }
 

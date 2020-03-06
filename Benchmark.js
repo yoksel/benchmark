@@ -5,12 +5,10 @@ export default class Benchmark {
 
   setProps({
     funcsList,
-    funcRepeat,
-    benchRepeat
+    funcRepeat
   }) {
     this.funcsList = funcsList;
     this.funcRepeat = funcRepeat ? funcRepeat : 500;
-    this.benchRepeat = benchRepeat ? benchRepeat : 20;
   }
 
   prepareResults() {
@@ -41,11 +39,9 @@ export default class Benchmark {
   }
 
   async runBenchmarksList() {
-    for (let i = 0; i < this.benchRepeat; i++) {
-      this.funcsList.forEach(item => {
-        this.runBenchmark(item);
-      });
-    }
+    this.funcsList.forEach(item => {
+      this.runBenchmark(item);
+    });
 
     return this.results;
   }
