@@ -63,7 +63,7 @@ function getFuncsContainers() {
 function getFuncsList() {
   const funcsList = funcsContainers.reduce((prev, {nameElem, codeElem}) => {
     if(!codeElem.value.trim()) {
-      codeElem.value = `console.log(123);`;
+      return prev;
     }
 
     const func = new Function(codeElem.value);
@@ -147,6 +147,10 @@ function getPropsFromLS() {
 
 function getFuncFromStr(savedParamsStr) {
   const savedParams = JSON.parse(savedParamsStr);
+
+  if(!savedParams.funcsList) {
+    return;
+  }
 
   savedParams.funcsList.forEach(item => {
     item.func = new Function(item.funcStr);
