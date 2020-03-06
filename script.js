@@ -25,18 +25,20 @@ setInputsEvents();
 function initBenchmark() {
   const benchmark = new Benchmark(benchmarkProps);
 
-  runBenchmarkControl.addEventListener('click', async () => {
-    runBenchmarkControl.disabled = true;
-    runBenchmarkControl.innerHTML = 'Tests are running...';
-    setStatus(messageProcess);
-    const results = await benchmark.start(runBenchmarkControl);
-
-    runBenchmarkControl.disabled = false;
-    runBenchmarkControl.innerHTML = 'Run';
-    printResults(results);
-  });
+  runBenchmarkControl.addEventListener('click', runBenchmark);
 
   return benchmark;
+}
+
+ async function runBenchmark () {
+  runBenchmarkControl.disabled = true;
+  runBenchmarkControl.innerHTML = 'Tests are running...';
+  setStatus(messageProcess);
+  const results = await benchmark.start(runBenchmarkControl);
+
+  runBenchmarkControl.disabled = false;
+  runBenchmarkControl.innerHTML = 'Run';
+  printResults(results);
 }
 
 function getFuncsContainers() {
@@ -157,6 +159,10 @@ function fillInputs() {
   const { funcsList } = benchmarkProps;
 
   funcsContainers.forEach(({nameElem, codeElem}, index) => {
+    if(!funcsList[index]) {
+      return;
+    }
+
     nameElem.value = funcsList[index].name;
     codeElem.value = funcsList[index].funcStr;
   });

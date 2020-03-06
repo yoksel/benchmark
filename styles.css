@@ -1,7 +1,10 @@
 HTML {
   font-size: 16px;
+
   --gray: #DDD;
   --accent: lightseagreen;
+  --radius: 8px;
+  --radius-tiny: 4px;
 }
 
 BODY {
@@ -29,15 +32,29 @@ H3 {
 }
 
 INPUT,
+TEXTAREA,
+BUTTON {
+  box-sizing: border-box;
+  font: inherit;
+}
+
+INPUT,
 TEXTAREA {
   width: 100%;
-  box-sizing: border-box;
   border: 1px solid var(--gray);
-  font: inherit;
 }
 
 TEXTAREA {
   resize: vertical;
+}
+
+BUTTON {
+  cursor: pointer;
+}
+
+BUTTON:disabled {
+  opacity: .5;
+  cursor: not-allowed;
 }
 
 .page {
@@ -55,16 +72,44 @@ TEXTAREA {
 
 .section__header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
 }
+
+.section__title {
+  margin-right: 1rem;
+}
+
+/* Handle code item — not used now */
+
+.handle-code-item {
+  background: none;
+  border: 1px solid;
+  border-radius: var(--radius-tiny);
+  font-size: 1.5rem;
+  line-height: 1;
+  font-weight: bold;
+}
+
+.handle-code-item--add {
+  margin-right: 1rem;
+  color: yellowgreen;
+}
+
+.handle-code-item--remove {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: orangered;
+}
+
+/* Share */
 
 .share {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin-left: 2rem;
+  margin-left: auto;
   white-space: nowrap;
   cursor: pointer;
 }
@@ -101,6 +146,7 @@ TEXTAREA {
 .inputs__list {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   width: 100%;
   margin: 0;
   padding: 0;
@@ -112,7 +158,10 @@ TEXTAREA {
 }
 
 .inputs__item {
-  flex-basis: calc(50% - 1rem);
+  position: relative;
+  flex-basis: calc(30% - 1rem);
+  margin-left: 2rem;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
@@ -160,16 +209,10 @@ TEXTAREA {
   margin-top: 1rem;
   border: none;
   background: #000;
-  border-radius: 10px;
+  border-radius: var(--radius);
   padding: .5rem 1rem;
   color: #FFF;
-  font: inherit;
   cursor: pointer;
-}
-
-.run-benchmark:disabled {
-  opacity: .5;
-  cursor: not-allowed;
 }
 
 /* Result */
