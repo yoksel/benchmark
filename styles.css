@@ -36,6 +36,10 @@ TEXTAREA {
   font: inherit;
 }
 
+TEXTAREA {
+  resize: vertical;
+}
+
 .page {
   max-width: 1000px;
   margin: 2rem auto;
@@ -97,8 +101,9 @@ TEXTAREA {
 }
 
 .inputs__item {
-  flex-grow: 1;
-  margin-left: 2rem;
+  flex-basis: calc(50% - 1rem);
+  display: flex;
+  flex-direction: column;
 }
 
 .inputs__item:first-child {
@@ -113,11 +118,21 @@ TEXTAREA {
   margin-top: 1rem;
 }
 
+.inputs__label--textarea {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 .inputs__label-text {
   display: block;
   margin-bottom: .25rem;
   font-style: italic;
   color: #777;
+}
+
+.inputs__textarea {
+  flex-grow: 1;
 }
 
 .inputs__footer {
@@ -129,8 +144,9 @@ TEXTAREA {
 /* Run control */
 
 .run-benchmark {
-  margin-top: 1rem;
+  align-self: flex-start;
   min-width: 100px;
+  margin-top: 1rem;
   border: none;
   background: #000;
   border-radius: 10px;
