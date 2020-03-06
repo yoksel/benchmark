@@ -126,9 +126,11 @@ function getPropsFromURL() {
 
 function savePropsToLS() {
   const propsStr = JSON.stringify(benchmarkProps);
+  const urlStr = getUrlStr();
 
   ls.setItem(lsKey, propsStr);
-  shareInput.value = getUrlStr();
+  shareInput.value = urlStr;
+  history.pushState(null, null, urlStr);
 }
 
 function getPropsFromLS() {

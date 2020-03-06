@@ -73,6 +73,17 @@ TEXTAREA {
   flex-grow: 1;
 }
 
+.share__text {
+  border-bottom: 1px dashed;
+  line-height: 1.2;
+  color: var(--accent);
+}
+
+.share--opened .share__text {
+  color: currentColor;
+  border-color: transparent;
+}
+
 .share__input {
   max-width: 0;
   opacity: 0;
