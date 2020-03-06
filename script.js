@@ -229,10 +229,12 @@ function printResults(results) {
     let resultStr = '';
 
     resultsList.forEach(item => {
+      let seconds = (item.time / 1000).toFixed(2);
+
       resultStr += `<tr>
         <td><h3>${item.name}</h3>
         ${item.desc}</td>
-        <td>${item.time / 1000}s</td>
+        <td>${seconds}s</td>
       </tr>`
     })
 

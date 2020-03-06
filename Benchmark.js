@@ -51,12 +51,12 @@ export default class Benchmark {
   }
 
   runBenchmark({func, name}) {
-    let startTime = Date.now();
+    let startTime = performance.now();
 
     for (let i = 0; i < this.funcRepeat; i++) {
       func();
     }
 
-    this.results[name].time += Date.now() - startTime;
+    this.results[name].time += performance.now() - startTime;
   }
 }
