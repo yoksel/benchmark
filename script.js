@@ -251,26 +251,32 @@ function setInputsEvents() {
 }
 
 function setStatus(message) {
-  resultTBody.innerHTML =`<tr><td colspan="2" class="results__status">${message}</td></tr>`;
+  resultTBody.innerHTML =`<tr><td colspan="3" class="results__status">${message}</td></tr>`;
 }
 
 function printResults(results) {
-    const resultsList = Object.values(results);
-    resultsList.sort((a, b) => {
-      return a.time - b.time;
-    });
-    let resultStr = '';
+  const resultsList = Object.values(results);
+  resultsList.sort((a, b) => {
+    return a.time - b.time;
+  });
+  let resultStr = '';
 
-    resultsList.forEach(item => {
-      let seconds = (item.time / 1000).toFixed(2);
+  resultsList.forEach(item => {
+    let seconds = toSeconds(item.time);
+    let median = item.median.toFixed(2);
 
-      resultStr += `<tr>
-        <td><h3>${item.name}</h3>
-        ${item.desc}</td>
-        <td>${seconds}s</td>
-      </tr>`
-    })
+    resultStr += `<tr>
+      <td><h3>${item.name}</h3>
+      ${item.desc}</td>
+      <td>${seconds}s</td>
+      <td>${median}ms</td>
+    </tr>`
+  })
 
-    resultTBody.innerHTML = '';
-    resultTBody.insertAdjacentHTML('afterBegin', resultStr);
-  }
+  resultTBody.innerHTML = '';
+  resultTBody.insertAdjacentHTML('afterBegin', resultStr);
+}
+
+function toSeconds(ms) {
+  return (ms / 1000).toFixed(2);
+}

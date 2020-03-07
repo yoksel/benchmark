@@ -14,16 +14,34 @@ export default class Benchmark {
   prepareResults() {
     const results = this.funcsList.reduce((prev, item) => {
       const {func, name} = item;
+
       prev[name] = {
         name,
         desc: '',
-        time: 0
+        time: 0,
+        times: []
       };
 
       return prev;
-    },{});
+    }, {});
 
     return results;
+  }
+
+  getMedian(times) {
+    times.slice().sort((a, b) => a - b);
+    let mid = Math.floor(times.length / 2);
+    return times[mid];
+  }
+
+  handleResults() {
+    for(let name in this.results) {
+      let item = this.results[name];
+
+      item.median = this.getMedian(item.times);
+    }
+
+    return this.results;
   }
 
   async start(control) {
@@ -43,16 +61,21 @@ export default class Benchmark {
       this.runBenchmark(item);
     });
 
-    return this.results;
+    return this.handleResults();
   }
 
+  // Замеряем время выполнения для каждой функции и для всего цикла
   runBenchmark({func, name}) {
-    let startTime = performance.now();
+    let benchStartTime = performance.now();
 
     for (let i = 0; i < this.funcRepeat; i++) {
+      let funcStartTime = performance.now();
       func();
+      const funcDiff = performance.now() - funcStartTime;
+      this.results[name].times.push(funcDiff);
     }
 
-    this.results[name].time += performance.now() - startTime;
+    const benchDiff = performance.now() - benchStartTime;
+    this.results[name].time += benchDiff;
   }
 }
